@@ -1,0 +1,74 @@
+<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="consultGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#03499e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00b4d8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="consultGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0066cc;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#00b4d8;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background elements -->
+  <circle cx="500" cy="100" r="80" fill="#03499e" opacity="0.1"/>
+  <circle cx="100" cy="500" r="100" fill="#00b4d8" opacity="0.1"/>
+  
+  <!-- Central figure - Business person -->
+  <ellipse cx="300" cy="500" rx="80" ry="20" fill="#03499e" opacity="0.2"/>
+  
+  <!-- Body -->
+  <rect x="270" y="350" width="60" height="120" rx="30" fill="url(#consultGrad1)"/>
+  
+  <!-- Head -->
+  <circle cx="300" cy="300" r="40" fill="url(#consultGrad2)"/>
+  
+  <!-- Arms -->
+  <rect x="220" y="370" width="50" height="15" rx="7" fill="url(#consultGrad1)" transform="rotate(-30 245 377)"/>
+  <rect x="330" y="370" width="50" height="15" rx="7" fill="url(#consultGrad1)" transform="rotate(30 355 377)"/>
+  
+  <!-- Briefcase -->
+  <rect x="350" y="400" width="60" height="45" rx="5" fill="#03499e" opacity="0.8"/>
+  <rect x="375" y="395" width="10" height="15" rx="3" fill="#03499e"/>
+  
+  <!-- Floating icons around the figure -->
+  <!-- Chart icon -->
+  <g transform="translate(150, 200)">
+    <rect width="60" height="60" rx="8" fill="white" stroke="#03499e" stroke-width="2"/>
+    <rect x="15" y="35" width="8" height="15" fill="#03499e"/>
+    <rect x="26" y="25" width="8" height="25" fill="#0066cc"/>
+    <rect x="37" y="30" width="8" height="20" fill="#00b4d8"/>
+  </g>
+  
+  <!-- Gear icon -->
+  <g transform="translate(400, 180)">
+    <circle cx="30" cy="30" r="30" fill="white" stroke="#03499e" stroke-width="2"/>
+    <circle cx="30" cy="30" r="15" fill="url(#consultGrad1)"/>
+    <rect x="27" y="5" width="6" height="10" rx="2" fill="#03499e"/>
+    <rect x="27" y="45" width="6" height="10" rx="2" fill="#03499e"/>
+    <rect x="5" y="27" width="10" height="6" rx="2" fill="#03499e"/>
+    <rect x="45" y="27" width="10" height="6" rx="2" fill="#03499e"/>
+  </g>
+  
+  <!-- Document icon -->
+  <g transform="translate(180, 400)">
+    <rect width="50" height="60" rx="5" fill="white" stroke="#03499e" stroke-width="2"/>
+    <line x1="10" y1="15" x2="40" y2="15" stroke="#03499e" stroke-width="2"/>
+    <line x1="10" y1="25" x2="40" y2="25" stroke="#03499e" stroke-width="2"/>
+    <line x1="10" y1="35" x2="30" y2="35" stroke="#03499e" stroke-width="2"/>
+  </g>
+  
+  <!-- Target icon -->
+  <g transform="translate(380, 380)">
+    <circle cx="30" cy="30" r="28" fill="white" stroke="#03499e" stroke-width="2"/>
+    <circle cx="30" cy="30" r="20" fill="none" stroke="#0066cc" stroke-width="2"/>
+    <circle cx="30" cy="30" r="12" fill="none" stroke="#00b4d8" stroke-width="2"/>
+    <circle cx="30" cy="30" r="5" fill="#03499e"/>
+  </g>
+  
+  <!-- Connection lines -->
+  <line x1="210" y1="230" x2="270" y2="310" stroke="#03499e" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+  <line x1="430" y1="210" x2="330" y2="310" stroke="#03499e" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+  <line x1="230" y1="430" x2="280" y2="380" stroke="#03499e" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+  <line x1="410" y1="410" x2="320" y2="380" stroke="#03499e" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+</svg>
