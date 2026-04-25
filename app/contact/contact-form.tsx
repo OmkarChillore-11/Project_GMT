@@ -92,20 +92,33 @@ export function ContactForm() {
 
     setStatus("loading")
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-    // Success
-    setStatus("success")
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      company: "",
-      service: "",
-      message: "",
-    })
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setStatus("success")
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        company: "",
+        service: "",
+        message: "",
+      })
+    } catch (error) {
+      setStatus("error")
+      setTimeout(() => setStatus("idle"), 3000)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
