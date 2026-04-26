@@ -10,7 +10,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "contact@gmtconsulting.in",
+    value: "head.gmtconsulting@gmail.com",
     description: "Send us an email anytime",
   },
   {
@@ -48,31 +48,50 @@ export function ContactForm() {
     service: "",
     message: "",
   })
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
-  const [errors, setErrors] = useState<Record<string, string>>({})
+   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+   const [errors, setErrors] = useState<Record<string, string>>({})
+   const [serverError, setServerError] = useState<string | null>(null)
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
 
+    // First Name validation - only letters, no numbers
     if (!formData.firstName.trim()) {
       newErrors.firstName = "First name is required"
+    } else if (!/^[a-zA-Z\s'-]+$/.test(formData.firstName.trim())) {
+      newErrors.firstName = "First name can only contain letters"
     }
+
+    // Last Name validation - only letters, no numbers
     if (!formData.lastName.trim()) {
       newErrors.lastName = "Last name is required"
+    } else if (!/^[a-zA-Z\s'-]+$/.test(formData.lastName.trim())) {
+      newErrors.lastName = "Last name can only contain letters"
     }
+
+    // Email validation
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required"
+      newErrors.email = "Email address is required"
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email"
+      newErrors.email = "Please enter a valid email address"
     }
+
+    // Phone validation - exactly 10 digits
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required"
-    } else if (!/^[0-9+\-\s()]{10,}$/.test(formData.phone)) {
-      newErrors.phone = "Please enter a valid phone number"
+    } else {
+      const phoneDigits = formData.phone.replace(/\D/g, '')
+      if (phoneDigits.length !== 10) {
+        newErrors.phone = "Phone number must be exactly 10 digits"
+      }
     }
+
+    // Service validation
     if (!formData.service) {
       newErrors.service = "Please select a service"
     }
+
+    // Message validation
     if (!formData.message.trim()) {
       newErrors.message = "Message is required"
     } else if (formData.message.trim().length < 20) {
@@ -83,7 +102,7 @@ export function ContactForm() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!validateForm()) {
@@ -91,6 +110,7 @@ export function ContactForm() {
     }
 
     setStatus("loading")
+    setServerError(null)
 
     try {
       const response = await fetch('/api/contact', {
@@ -101,8 +121,10 @@ export function ContactForm() {
         body: JSON.stringify(formData),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        throw new Error('Failed to send message')
+        throw new Error(data.error || 'Failed to send message')
       }
 
       setStatus("success")
@@ -117,7 +139,9 @@ export function ContactForm() {
       })
     } catch (error) {
       setStatus("error")
-      setTimeout(() => setStatus("idle"), 3000)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to send message'
+      setServerError(errorMessage)
+      setTimeout(() => setStatus("idle"), 5000)
     }
   }
 
@@ -208,8 +232,13 @@ export function ContactForm() {
                     Send Another Message
                   </button>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+               ) : (
+                 <form onSubmit={handleSubmit} className="space-y-6">
+                   {serverError && (
+                     <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+                       <p className="text-sm text-red-700">{serverError}</p>
+                     </div>
+                   )}
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label htmlFor="firstName" className="block text-sm font-medium text-foreground">

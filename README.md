@@ -161,7 +161,7 @@ Copyright © 2024 GrowMore Technocrats Consulting LLP. All rights reserved.
 
 ## 📞 Contact
 
-- **Email**: contact@gmtconsulting.in
+- **Email**: head.gmtconsulting@gmail.com
 - **Phone**: +91 98765 43210
 - **Location**: Mumbai, Maharashtra, India
 
